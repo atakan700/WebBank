@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WebBank.Models.Kisi>
+@using WebBank.Models 
+<h2>Kişi Listesi</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Aktif</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kisi in Model)
+        {
+            <tr>
+                <td>@kisi.Ad</td>
+                <td>@kisi.Soyad</td>
+                <td>@(kisi.InternetBank ? "Evet" : "Hayır")</td>
+            </tr>
+        }
+    </tbody>
+</table>

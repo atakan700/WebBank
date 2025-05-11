@@ -1,0 +1,13 @@
+﻿@model WebBank.Models.Kisi
+
+<h2>Kişi Ekle</h2>
+
+<form asp-action="Ekle" method="post">
+    <label>Ad</label>
+    <input asp-for="Ad" /><br />
+    <label>Soyad</label>
+    <input asp-for="Soyad" /><br />
+    <label>Internet Bankacalığı?</label>
+    <input asp-for="InternetBank" type="checkbox" /><br />
+    <button type="submit">Kaydet</button>
+</form>

@@ -1,0 +1,11 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build klasörleri
+bin/
+obj/
+
+# ASP.NET config (opsiyonel, güvenlik için)
+appsettings.Development.json
