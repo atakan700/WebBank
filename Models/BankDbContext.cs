@@ -9,7 +9,14 @@ namespace WebBank.Models
             {
             }
 
-            public DbSet<Kisi> Kisiler { get; set; }
-        
+
+            public DbSet<Kisiler> Kisiler { get; set; }
+            public DbSet<Hesap> HesapBilgileri { get; set; }
+            public DbSet<Calisan> Calisanlar { get; set; }
+            public DbSet<Islem> Islemler { get; set; }
+            public DbSet<IslemUcreti> IslemUcretleri { get; set; }
+             public DbSet<Sube> Sube { get; set; }
+
+
     }
 }

@@ -19,7 +19,8 @@ namespace WebBank.Controllers
         }
 
         [HttpPost]
-        public IActionResult Ekle(Kisi kisi)
+        public IActionResult Ekle(Kisiler kisi)
+
         {
             if (ModelState.IsValid)
             {
@@ -27,8 +28,20 @@ namespace WebBank.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Listele");
             }
+
+            else
+            {
+                // ModelState geçersizse, hata mesajlarını konsola yazdırabilirsiniz
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+            }
+
             return View(kisi);
         }
+
+
 
         public IActionResult Listele()
         {

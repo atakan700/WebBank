@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WebBank.Models.Sube>
+@using WebBank.Models 
+
+<h2>Sube Listesi</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Sube Adı</th>
+            <th>Bakiye</th>          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Sube in Model)
+        {
+            <tr>
+                <td>@Sube.Ad</td>
+                <td>@Sube.ParaMiktari</td>               
+            </tr>
+        }
+    </tbody>
+</table>
