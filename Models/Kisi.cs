@@ -15,7 +15,8 @@ namespace WebBank.Models
         public string Soyad { get; set; }
 
         public bool InternetBank { get; set; }
-        
+        public string subeBilgisi { get; set; }
+
         [ValidateNever]
         public ICollection<Hesap> Hesaplar { get; set; }
     }

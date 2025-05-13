@@ -1,15 +1,49 @@
 @model WebBank.Models.Kisiler
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
 
 <h2>Kişi Ekle</h2>
 
+<!-- Genel validasyon hataları -->
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
 <form asp-action="Ekle" method="post">
-    <label>Ad</label>
-    <input asp-for="Ad" /><br />
-    <label>Soyad</label>
-    <input asp-for="Soyad" /><br />
-    <label>Internet Bankacalığı?</label>
-    <input asp-for="InternetBank" type="checkbox" /><br />
-    <button type="submit">Kaydet</button>
+    <div class="form-group">
+        <label asp-for="Ad" class="control-label">Ad</label>
+        <input asp-for="Ad" class="form-control" />
+        <span asp-validation-for="Ad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Soyad" class="control-label">Soyad</label>
+        <input asp-for="Soyad" class="form-control" />
+        <span asp-validation-for="Soyad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="InternetBank" class="control-label">İnternet Bankacılığı?</label>
+        <select asp-for="InternetBank" class="form-control">
+            <option value="true">Evet</option>
+            <option value="false">Hayır</option>
+        </select>
+        <span asp-validation-for="InternetBank" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="subeBilgisi" class="control-label">Şube Bilgisi</label>
+        <select asp-for="subeBilgisi" class="form-control">
+            <option value="">Seçiniz</option>
+            <option value="İstanbul">İstanbul</option>
+            <option value="Ankara">Ankara</option>
+            <option value="İzmir">İzmir</option>
+        </select>
+        <span asp-validation-for="subeBilgisi" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>
+
+@section Scripts {
+    <!-- Bu kısım, istemci taraflı validasyon için gereklidir -->
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

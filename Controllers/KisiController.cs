@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebBank.Models;
+using System;
 
 namespace WebBank.Controllers
 {
@@ -37,6 +38,20 @@ namespace WebBank.Controllers
                     Console.WriteLine(error.ErrorMessage);
                 }
             }
+
+
+            Random random = new Random();
+
+            string Iban = "TR00 7313 0";
+            for (int i = 0; i <= 9; i++)
+            {
+                 Iban += (random.Next()%10).ToString();
+
+            }
+
+            
+            
+
 
             return View(kisi);
         }
