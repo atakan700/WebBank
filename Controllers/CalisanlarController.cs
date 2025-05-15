@@ -3,7 +3,7 @@ using WebBank.Models;
 
 namespace WebBank.Controllers
 {
-    public class CalisanlarController:Controller
+    public class CalisanlarController : Controller
     {
         private readonly BankDbContext _context;
 

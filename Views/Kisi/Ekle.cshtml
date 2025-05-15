@@ -1,49 +1,47 @@
-@model WebBank.Models.Kisiler
-
-<h2>Kişi Ekle</h2>
-
-<!-- Genel validasyon hataları -->
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@model WebBank.Models.ViewModels.KisiHesapViewModel
 
 <form asp-action="Ekle" method="post">
     <div class="form-group">
-        <label asp-for="Ad" class="control-label">Ad</label>
-        <input asp-for="Ad" class="form-control" />
-        <span asp-validation-for="Ad" class="text-danger"></span>
+        <label asp-for="Kisiler.Ad" class="control-label">Ad</label>
+        <input asp-for="Kisiler.Ad" class="form-control" />
+        <span asp-validation-for="Kisiler.Ad" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Soyad" class="control-label">Soyad</label>
-        <input asp-for="Soyad" class="form-control" />
-        <span asp-validation-for="Soyad" class="text-danger"></span>
+        <label asp-for="Kisiler.Soyad" class="control-label">Soyad</label>
+        <input asp-for="Kisiler.Soyad" class="form-control" />
+        <span asp-validation-for="Kisiler.Soyad" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="InternetBank" class="control-label">İnternet Bankacılığı?</label>
-        <select asp-for="InternetBank" class="form-control">
-            <option value="true">Evet</option>
-            <option value="false">Hayır</option>
+        <label asp-for="Kisiler.InternetBank" class="control-label">Internet Bankacılığı</label>
+        <input asp-for="Kisiler.InternetBank" type="checkbox" class="form-check-input" />
+        <span asp-validation-for="Kisiler.InternetBank" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SubeId">Şube Seçiniz</label>
+        <select asp-for="SubeId" asp-items="@(new SelectList(ViewBag.Subeler, "Id", "Ad"))" class="form-control">
+            <option value="">-- Şube Seçiniz --</option>
         </select>
-        <span asp-validation-for="InternetBank" class="text-danger"></span>
+        <span asp-validation-for="SubeId" class="text-danger"></span>
+    </div>
+    <!-- Hesap Türü -->
+    <div class="form-group">
+        <label asp-for="Hesap.HesapTuru" class="control-label">Hesap Türü</label>
+        <select asp-for="Hesap.HesapTuru" class="form-control">
+            <option value="TL">TL</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+        </select>
+        <span asp-validation-for="Hesap.HesapTuru" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="subeBilgisi" class="control-label">Şube Bilgisi</label>
-        <select asp-for="subeBilgisi" class="form-control">
-            <option value="">Seçiniz</option>
-            <option value="İstanbul">İstanbul</option>
-            <option value="Ankara">Ankara</option>
-            <option value="İzmir">İzmir</option>
-        </select>
-        <span asp-validation-for="subeBilgisi" class="text-danger"></span>
+        <label asp-for="Hesap.Bakiye" class="control-label">Bakiye</label>
+        <input asp-for="Hesap.Bakiye" class="form-control" />
+        <span asp-validation-for="Hesap.Bakiye" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>
-
-@section Scripts {
-    <!-- Bu kısım, istemci taraflı validasyon için gereklidir -->
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

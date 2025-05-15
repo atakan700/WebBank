@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBank.Models;
 
@@ -11,9 +12,11 @@ using WebBank.Models;
 namespace WebBank.Migrations
 {
     [DbContext(typeof(BankDbContext))]
-    partial class BankDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514004037_hsb")]
+    partial class hsb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,12 +65,13 @@ namespace WebBank.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("IBAN")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MusteriId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubeId")
+                    b.Property<int>("SubeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -159,6 +163,7 @@ namespace WebBank.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("subeBilgisi")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -207,7 +212,9 @@ namespace WebBank.Migrations
 
                     b.HasOne("WebBank.Models.Sube", "Sube")
                         .WithMany("Hesaplar")
-                        .HasForeignKey("SubeId");
+                        .HasForeignKey("SubeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Musteri");
 

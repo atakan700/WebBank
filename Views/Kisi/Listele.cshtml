@@ -1,5 +1,6 @@
 @model IEnumerable<WebBank.Models.Kisiler>
-@using WebBank.Models 
+@using WebBank.Models
+
 <h2>Kişi Listesi</h2>
 
 <table border="1">
@@ -8,18 +9,23 @@
             <th>Ad</th>
             <th>Soyad</th>
             <th>Aktif</th>
-            <th>sube</th>
+            <th>Şube</th>
+            <th>Hesap Türü</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var kisi in Model)
         {
-            <tr>
-                <td>@kisi.Ad</td>
-                <td>@kisi.Soyad</td>
-                <td>@(kisi.InternetBank ? "Evet" : "Hayır")</td>
-                <td>@kisi.subeBilgisi</td>
-            </tr>
+            @foreach (var hesap in kisi.Hesaplar) 
+            {
+                <tr>
+                    <td>@kisi.Ad</td>
+                    <td>@kisi.Soyad</td>
+                    <td>@(kisi.InternetBank ? "Evet" : "Hayır")</td>
+                    <td>@kisi.subeBilgisi</td>
+                    <td>@hesap.HesapTuru</td>  <!-- Hesap türünü göster -->
+                </tr>
+            }
         }
     </tbody>
 </table>

@@ -12,8 +12,8 @@ using WebBank.Models;
 namespace WebBank.Migrations
 {
     [DbContext(typeof(BankDbContext))]
-    [Migration("20250513092607_Initial")]
-    partial class Initial
+    [Migration("20250514004221_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -159,6 +159,10 @@ namespace WebBank.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Soyad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("subeBilgisi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -12,8 +12,8 @@ using WebBank.Models;
 namespace WebBank.Migrations
 {
     [DbContext(typeof(BankDbContext))]
-    [Migration("20250513191308_kayinbaba")]
-    partial class kayinbaba
+    [Migration("20250514005449_migi")]
+    partial class migi
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,13 +65,12 @@ namespace WebBank.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("IBAN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MusteriId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubeId")
+                    b.Property<int?>("SubeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -163,7 +162,6 @@ namespace WebBank.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("subeBilgisi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -212,9 +210,7 @@ namespace WebBank.Migrations
 
                     b.HasOne("WebBank.Models.Sube", "Sube")
                         .WithMany("Hesaplar")
-                        .HasForeignKey("SubeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubeId");
 
                     b.Navigation("Musteri");
 

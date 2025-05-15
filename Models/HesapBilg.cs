@@ -12,17 +12,17 @@ namespace WebBank.Models
     public class Hesap
     {
         public int Id { get; set; }
-        public string IBAN { get; set; }
+        public string? IBAN { get; set; }
         public double Bakiye { get; set; }
         public HesapTuru HesapTuru { get; set; }
 
         public int MusteriId { get; set; }
-        public Kisiler Musteri { get; set; }
+        public Kisiler? Musteri { get; set; }
 
-        public int SubeId { get; set; }
-        public Sube Sube { get; set; }
+        public int? SubeId { get; set; }
+        public Sube? Sube { get; set; }
 
-        public ICollection<Islem> Islemler { get; set; }
+        public ICollection<Islem>? Islemler { get; set; }
     }
 
 }

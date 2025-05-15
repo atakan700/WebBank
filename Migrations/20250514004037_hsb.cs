@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebBank.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class hsb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,8 @@ namespace WebBank.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ad = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Soyad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InternetBank = table.Column<bool>(type: "bit", nullable: false)
+                    InternetBank = table.Column<bool>(type: "bit", nullable: false),
+                    subeBilgisi = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
