@@ -12,8 +12,8 @@ using WebBank.Models;
 namespace WebBank.Migrations
 {
     [DbContext(typeof(BankDbContext))]
-    [Migration("20250514004221_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250515215327_seckin")]
+    partial class seckin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,10 +34,9 @@ namespace WebBank.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Ad")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rol")
+                    b.Property<int?>("Rol")
                         .HasColumnType("int");
 
                     b.Property<int>("SubeId")
@@ -65,13 +64,12 @@ namespace WebBank.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("IBAN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MusteriId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubeId")
+                    b.Property<int?>("SubeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -158,12 +156,15 @@ namespace WebBank.Migrations
                     b.Property<bool>("InternetBank")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Parola")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Soyad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("subeBilgisi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -212,9 +213,7 @@ namespace WebBank.Migrations
 
                     b.HasOne("WebBank.Models.Sube", "Sube")
                         .WithMany("Hesaplar")
-                        .HasForeignKey("SubeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubeId");
 
                     b.Navigation("Musteri");
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebBank.Migrations
 {
     /// <inheritdoc />
-    public partial class hsb : Migration
+    public partial class seckin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,8 +34,9 @@ namespace WebBank.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ad = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Soyad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Parola = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InternetBank = table.Column<bool>(type: "bit", nullable: false),
-                    subeBilgisi = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    subeBilgisi = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,8 +63,8 @@ namespace WebBank.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Ad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rol = table.Column<int>(type: "int", nullable: false),
+                    Ad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rol = table.Column<int>(type: "int", nullable: true),
                     SubeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -83,11 +84,11 @@ namespace WebBank.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IBAN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IBAN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Bakiye = table.Column<double>(type: "float", nullable: false),
                     HesapTuru = table.Column<int>(type: "int", nullable: false),
                     MusteriId = table.Column<int>(type: "int", nullable: false),
-                    SubeId = table.Column<int>(type: "int", nullable: false)
+                    SubeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -102,8 +103,7 @@ namespace WebBank.Migrations
                         name: "FK_HesapBilgileri_Sube_SubeId",
                         column: x => x.SubeId,
                         principalTable: "Sube",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

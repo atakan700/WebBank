@@ -14,6 +14,8 @@ namespace WebBank.Models
         [Required(ErrorMessage = "Soyad alanı gereklidir.")]
         public string Soyad { get; set; }
 
+        [Required(ErrorMessage = " alanı gereklidir.")]
+        public string Parola {  get; set; }
         public bool InternetBank { get; set; }
         public string? subeBilgisi { get; set; }
 

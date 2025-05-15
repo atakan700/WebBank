@@ -13,11 +13,16 @@ namespace WebBank.Models
     public class Calisan
     {
         public int Id { get; set; }
-        public string Ad { get; set; }
-        public Rol Rol { get; set; }
+        public string? Ad { get; set; }
+        public Rol? Rol { get; set; }
 
+        // Foreign key
         public int SubeId { get; set; }
+
+        // Navigation property
+        [ValidateNever]
         public Sube Sube { get; set; }
+
 
         [ValidateNever]
         public ICollection<Islem> YaptigiIslemler { get; set; }

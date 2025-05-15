@@ -31,10 +31,9 @@ namespace WebBank.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Ad")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rol")
+                    b.Property<int?>("Rol")
                         .HasColumnType("int");
 
                     b.Property<int>("SubeId")
@@ -153,6 +152,10 @@ namespace WebBank.Migrations
 
                     b.Property<bool>("InternetBank")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Parola")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Soyad")
                         .IsRequired()

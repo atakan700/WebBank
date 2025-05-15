@@ -1,22 +1,39 @@
-﻿@model IEnumerable<WebBank.Models.Sube>
-@using WebBank.Models 
+﻿@model WebBank.Models.Calisan
+@{
+    ViewData["Title"] = "Çalışan Ekle";
+    var subeler = ViewBag.Subeler as List<WebBank.Models.Sube>;
+}
 
-<h2>Sube Listesi</h2>
+<h2>Çalışan Ekle</h2>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>Sube Adı</th>
-            <th>Bakiye</th>          
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Sube in Model)
-        {
-            <tr>
-                <td>@Sube.Ad</td>
-                <td>@Sube.ParaMiktari</td>               
-            </tr>
-        }
-    </tbody>
-</table>
+<form asp-action="Ekle" method="post">
+    <div class="form-group">
+        <label asp-for="Ad"></label>
+        <input asp-for="Ad" class="form-control" />
+        <span asp-validation-for="Ad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Rol">Rol</label>
+        <select asp-for="Rol" class="form-control">
+            <option value="0">Şube Müdürü</option>
+            <option value="1">Gişe Memuru</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SubeId">Şube</label>
+        <select asp-for="SubeId" class="form-control">
+            @foreach (var sube in subeler)
+            {
+                <option value="@sube.Id">@sube.Ad</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

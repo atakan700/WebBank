@@ -33,7 +33,7 @@ public class KisiController : Controller
     [HttpPost]
     public IActionResult Ekle(KisiHesapViewModel model)
     {
-        ViewBag.Subeler = _context.Sube.ToList(); 
+        ViewBag.Subeler = _context.Sube.ToList();
 
         if (ModelState.IsValid)
         {
@@ -65,4 +65,33 @@ public class KisiController : Controller
         return View(kisiler);
     }
 
+
+
+    [HttpGet]
+    public IActionResult Giris()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Giris(string Ad, string Parola)
+    {
+        if (string.IsNullOrEmpty(Ad) || string.IsNullOrEmpty(Parola))
+        {
+            ModelState.AddModelError("", "Kullanıcı adı ve parola gereklidir.");
+            return View();
+        }
+
+        var kisi = _context.Kisiler.FirstOrDefault(k => k.Ad == Ad && k.Parola == Parola);
+
+        if (kisi != null)
+        {
+            // Oturum oluşturulabilir burada (örn. session)
+            TempData["KullaniciAdi"] = kisi.Ad;
+            return RedirectToAction("Listele");
+        }
+
+        ModelState.AddModelError("", "Geçersiz kullanıcı adı veya parola.");
+        return View();
+    }
 }
