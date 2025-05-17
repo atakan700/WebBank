@@ -1,0 +1,18 @@
+﻿@model WebBank.Models.ViewModels.YeniHesapViewModel
+@using WebBank.Models
+
+<h2>Yeni Hesap Aç</h2>
+
+<form asp-controller="Hesap" asp-action="HesapEkle" method="post">
+    <div>
+        <label>Hesap Türü</label>
+        <select asp-for="HesapTuru" asp-items="Html.GetEnumSelectList<HesapTuru>()"></select>
+    </div>
+
+    <div>
+        <label>Şube</label>
+        <select asp-for="SubeId" asp-items="@(new SelectList(Model.Subeler, "Id", "Ad"))"></select>
+    </div>
+
+    <button type="submit">Hesap Aç</button>
+</form>

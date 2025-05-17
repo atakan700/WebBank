@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 namespace WebBank.Models
 {
@@ -17,6 +18,7 @@ namespace WebBank.Models
         public HesapTuru HesapTuru { get; set; }
 
         public int MusteriId { get; set; }
+        [ValidateNever]
         public Kisiler? Musteri { get; set; }
 
         public int? SubeId { get; set; }

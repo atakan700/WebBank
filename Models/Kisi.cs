@@ -8,6 +8,10 @@ namespace WebBank.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(11, ErrorMessage = "TC No 11 haneli olmalıdır.")]
+        public string TcNo { get; set; }
+
         [Required(ErrorMessage = "Ad alanı gereklidir.")]
         public string Ad { get; set; }
 

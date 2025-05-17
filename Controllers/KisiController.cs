@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebBank.Models.ViewModels;
 using WebBank.Models;
+using WebBank.Helper;
 using Microsoft.EntityFrameworkCore;
 
 public class KisiController : Controller
@@ -11,16 +12,7 @@ public class KisiController : Controller
     {
         _context = context;
     }
-    private string GenerateIban()
-    {
-        Random random = new Random();
-        string iban = "TR00 7313 0";
-        for (int i = 0; i <= 9; i++)
-        {
-            iban += random.Next(10).ToString();
-        }
-        return iban;
-    }
+   
 
     [HttpGet]
     public IActionResult Ekle()
@@ -43,7 +35,7 @@ public class KisiController : Controller
 
             model.Hesap.MusteriId = model.Kisiler.Id;
             model.Hesap.SubeId = model.SubeId;
-            model.Hesap.IBAN = GenerateIban();
+            model.Hesap.IBAN = HesapIslemleri.IbanUret();
             model.Hesap.Bakiye = 0;
 
             _context.HesapBilgileri.Add(model.Hesap);
@@ -74,24 +66,75 @@ public class KisiController : Controller
     }
 
     [HttpPost]
-    public IActionResult Giris(string Ad, string Parola)
+    public IActionResult Giris(GirisViewModel model)
     {
-        if (string.IsNullOrEmpty(Ad) || string.IsNullOrEmpty(Parola))
+        if (ModelState.IsValid)
         {
-            ModelState.AddModelError("", "Kullanıcı adı ve parola gereklidir.");
-            return View();
+            var kisi = _context.Kisiler
+                .Include(k => k.Hesaplar)
+                .ThenInclude(h => h.Sube)
+                .FirstOrDefault(k => k.TcNo == model.TcNo && k.Parola == model.Parola);
+
+            if (kisi != null)
+            {
+                HttpContext.Session.SetInt32("KullaniciId", kisi.Id);
+                return RedirectToAction("HesapSayfasi");
+            }
+            else
+            {
+                ViewBag.Hata = "TC No veya parola hatalı.";
+            }
         }
 
-        var kisi = _context.Kisiler.FirstOrDefault(k => k.Ad == Ad && k.Parola == Parola);
+        return View(model);
+    }
 
-        if (kisi != null)
-        {
-            // Oturum oluşturulabilir burada (örn. session)
-            TempData["KullaniciAdi"] = kisi.Ad;
-            return RedirectToAction("Listele");
-        }
+    public IActionResult HesapSayfasi()
+    {
+        int? kullaniciId = HttpContext.Session.GetInt32("KullaniciId");
 
-        ModelState.AddModelError("", "Geçersiz kullanıcı adı veya parola.");
+        if (kullaniciId == null)
+            return RedirectToAction("Giris");
+
+        var kisi = _context.Kisiler
+            .Include(k => k.Hesaplar)
+            .ThenInclude(h => h.Sube)
+            .FirstOrDefault(k => k.Id == kullaniciId);
+
+        return View(kisi);
+    }
+
+
+    [HttpGet]
+    public IActionResult HesapEkle()
+    {
+        // Kullanıcının oturum açıp açmadığını kontrol edebilirsin
+        var kullaniciId = HttpContext.Session.GetInt32("KullaniciId");
+        if (kullaniciId == null)
+            return RedirectToAction("Giris", "Kisiler");
+
+        // Şube listesini viewmodel olarak ekleyebilirsin (dilersen)
         return View();
     }
+
+    [HttpPost]
+    public IActionResult HesapEkle(Hesap hesap)
+    {
+        var kullaniciId = HttpContext.Session.GetInt32("KullaniciId");
+        if (kullaniciId == null)
+            return RedirectToAction("Giris", "Kisiler");
+
+        hesap.MusteriId = kullaniciId.Value;
+        hesap.IBAN = HesapIslemleri.IbanUret(); // IBAN üretme metodunu unutma!
+
+        _context.HesapBilgileri.Add(hesap);
+        _context.SaveChanges();
+
+        return RedirectToAction("HesapSayfasi");
+    }
+
+
+
+
+
 }

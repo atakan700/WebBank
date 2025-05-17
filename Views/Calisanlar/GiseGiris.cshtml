@@ -1,0 +1,20 @@
+﻿@model WebBank.Models.ViewModels.GirisViewModel
+
+<form asp-action="GiseGiris" method="post">
+    <div>
+        <label>TC Kimlik No</label>
+        <input asp-for="TcNo" class="form-control" />
+        <span asp-validation-for="TcNo" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Parola</label>
+        <input asp-for="Parola" type="password" class="form-control" />
+        <span asp-validation-for="Parola" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+</form>
+
+@if (ViewBag.Hata != null)
+{
+    <p style="color:red;">@ViewBag.Hata</p>
+}

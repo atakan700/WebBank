@@ -1,0 +1,104 @@
+﻿@model WebBank.Models.Kisiler
+
+@{
+    ViewData["Title"] = "Kullanıcı Paneli";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Kullanıcı Bilgileri -->
+        <div class="col-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">
+                        <i class="fas fa-user-circle me-2"></i>
+                        Merhaba,@Model.Ad @Model.Soyad <!--İSİM GELECEK-->
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- İşlemler Bölümü -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-exchange-alt me-2"></i>
+                        İşlemler
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-money-bill-transfer me-2"></i>EFT</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-money-bill-wave me-2"></i>HAVALE</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-money-bill-trend-up me-2"></i>PARA YATIRMA</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-money-bill-trend-down me-2"></i>PARA ÇEKME</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a asp-controller="Hesap" asp-action="HesapEkle" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-money-bill-trend-down me-2"></i>HESAP AÇ</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hesaplar Bölümü -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-wallet me-2"></i>
+                        Hesaplarınız
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @foreach (var hesap in Model.Hesaplar)
+                {
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">@hesap.HesapTuru Hesabı</h6>
+                                    <h6 class="text-muted">Iban:@hesap.IBAN</h6>
+                                    <h6 class="text-muted">Sube:@hesap.Sube.Ad</h6>
+                                    <h6 class="text-muted">Bakiye:@hesap.Bakiye</h6>
+                                </div>
+                                
+                            </div>
+                        </div>
+                
+                        </div>
+                }
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+
+
+
+
+@section Scripts {
+    <script>
+        // Font Awesome ikonlarını yükle
+        document.addEventListener('DOMContentLoaded', function () {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css';
+            document.head.appendChild(link);
+        });
+    </script>
+}

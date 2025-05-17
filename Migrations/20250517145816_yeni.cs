@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebBank.Migrations
 {
     /// <inheritdoc />
-    public partial class seckin : Migration
+    public partial class yeni : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,6 +32,7 @@ namespace WebBank.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    TcNo = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     Ad = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Soyad = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Parola = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -63,8 +64,10 @@ namespace WebBank.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Ad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rol = table.Column<int>(type: "int", nullable: true),
+                    TcNo = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Ad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Soyad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Parola = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

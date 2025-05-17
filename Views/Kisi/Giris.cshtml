@@ -1,29 +1,18 @@
-﻿@{
-    ViewData["Title"] = "Giris Yap";
-}
-
-<h2>Giriş Yap</h2>
+﻿@model WebBank.Models.ViewModels.GirisViewModel
 
 <form asp-action="Giris" method="post">
-    <div class="form-group">
-        <label>Kullanıcı Adı</label>
-        <input name="Ad" class="form-control" />
+    <div>
+        <label>TC Kimlik</label>
+        <input asp-for="TcNo" />
     </div>
-
-    <div class="form-group">
+    <div>
         <label>Parola</label>
-        <input name="Parola" type="password" class="form-control" />
+        <input asp-for="Parola" type="password" />
     </div>
-
-    <button type="submit" class="btn btn-primary">Giriş</button>
+    <button type="submit">Giriş Yap</button>
 </form>
 
-@if (!ViewData.ModelState.IsValid)
+@if (ViewBag.Hata != null)
 {
-    <div class="alert alert-danger">
-        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-        {
-            <p>@error.ErrorMessage</p>
-        }
-    </div>
+    <p style="color:red;">@ViewBag.Hata</p>
 }

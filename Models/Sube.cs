@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebBank.Models
 {
@@ -8,6 +9,7 @@ namespace WebBank.Models
         public string Ad { get; set; }
         public double ParaMiktari { get; set; }
 
+        [ValidateNever]
         public ICollection<Calisan> Calisanlar { get; set; }
         public ICollection<Hesap> Hesaplar { get; set; }
     }

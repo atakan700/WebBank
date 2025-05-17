@@ -5,5 +5,6 @@ public class KisiHesapViewModel
 {
     public Kisiler Kisiler { get; set; }
     public Hesap Hesap { get; set; }    
-    public int SubeId { get; set; }          // Veritabanıyla ilişki için lazım
+    public int SubeId { get; set; }         
+
 }

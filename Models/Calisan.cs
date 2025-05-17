@@ -12,9 +12,21 @@ namespace WebBank.Models
 
     public class Calisan
     {
+        [Key]
         public int Id { get; set; }
-        public string? Ad { get; set; }
-        public Rol? Rol { get; set; }
+
+        [Required]
+        [StringLength(11, ErrorMessage = "TC No 11 haneli olmalıdır.")]
+        public string TcNo { get; set; }
+
+        [Required(ErrorMessage = "Ad alanı gereklidir.")]
+        public string Ad { get; set; }
+
+        [Required(ErrorMessage = "Soyad alanı gereklidir.")]
+        public string Soyad { get; set; }
+
+        [Required(ErrorMessage = " alanı gereklidir.")]
+        public string Parola { get; set; }
 
         // Foreign key
         public int SubeId { get; set; }

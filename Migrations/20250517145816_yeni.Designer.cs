@@ -12,8 +12,8 @@ using WebBank.Models;
 namespace WebBank.Migrations
 {
     [DbContext(typeof(BankDbContext))]
-    [Migration("20250515215327_seckin")]
-    partial class seckin
+    [Migration("20250517145816_yeni")]
+    partial class yeni
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,13 +34,24 @@ namespace WebBank.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Ad")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Rol")
-                        .HasColumnType("int");
+                    b.Property<string>("Parola")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Soyad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SubeId")
                         .HasColumnType("int");
+
+                    b.Property<string>("TcNo")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.HasKey("Id");
 
@@ -163,6 +174,11 @@ namespace WebBank.Migrations
                     b.Property<string>("Soyad")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TcNo")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("subeBilgisi")
                         .HasColumnType("nvarchar(max)");
