@@ -27,7 +27,7 @@
         .giris-form input {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             border: 1px solid #ccc;
             border-radius: 8px;
             transition: border-color 0.3s;
@@ -47,11 +47,18 @@
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
+            margin-top: 10px;
         }
 
             .giris-form button:hover {
                 background-color: #0056b3;
             }
+
+        .giris-form .text-danger {
+            font-size: 0.875rem;
+            margin-bottom: 10px;
+            display: block;
+        }
 
         .giris-form .error-message {
             color: red;
@@ -60,22 +67,27 @@
         }
 </style>
 
-<div class="giris-form">
-    <h1>Müşteri Giriş</h1>
-    <form asp-action="Giris" method="post">
-        <div>
-            <label>TC Kimlik</label>
-            <input asp-for="TcNo" />
-        </div>
-        <div>
-            <label>Parola</label>
-            <input asp-for="Parola" type="password" />
-        </div>
-        <button type="submit">Giriş Yap</button>
-    </form>
+@{
+    ViewData["Title"] = "Şube Müdürü Girişi";
+}
 
-    @if (ViewBag.Hata != null)
-    {
-        <p class="error-message">@ViewBag.Hata</p>
-    }
+<h2 class="mb-4">Şube Müdürü Giriş</h2>
+
+<form asp-action="MudurGiris" method="post">
+    <div class="mb-3">
+        <label for="tcNo" class="form-label">TC Kimlik No</label>
+        <input type="text" name="tcNo" class="form-control" required maxlength="11" />
+    </div>
+    <div class="mb-3">
+        <label for="parola" class="form-label">Parola</label>
+        <input type="password" name="parola" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+</form>
+
+@if (TempData["Hata"] != null)
+{
+    <div class="alert alert-danger mt-3">@TempData["Hata"]</div>
+}
+
 </div>

@@ -14,7 +14,7 @@ namespace WebBank.Models
     {
         public int Id { get; set; }
         public string? IBAN { get; set; }
-        public double Bakiye { get; set; }
+        public decimal Bakiye { get; set; }
         public HesapTuru HesapTuru { get; set; }
 
         public int MusteriId { get; set; }

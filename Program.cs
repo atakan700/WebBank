@@ -20,7 +20,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -53,6 +53,6 @@ app.UseAuthorization();
 // Varsayılan route ayarı
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Calisanlar}/{action=GiseGiris}/{id?}");
+    pattern: "{controller=SubeMuduru}/{action=MudurGiris}/{id?}");
 
 app.Run();

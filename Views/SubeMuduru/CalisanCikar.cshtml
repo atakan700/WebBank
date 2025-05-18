@@ -1,0 +1,45 @@
+﻿@model List<WebBank.Models.Calisan>
+
+@{
+    ViewData["Title"] = "Çalışan Çıkar";
+}
+
+<h2 class="mb-4">Şubedeki Gişe Görevlileri</h2>
+
+@if (TempData["Mesaj"] != null)
+{
+    <div class="alert alert-success">@TempData["Mesaj"]</div>
+}
+@if (TempData["Hata"] != null)
+{
+    <div class="alert alert-danger">@TempData["Hata"]</div>
+}
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>TC No</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.TcNo</td>
+                <td>@c.Ad</td>
+                <td>@c.Soyad</td>
+                <td>
+                    <form asp-action="CalisanCikar" asp-controller="SubeMuduru" method="post" onsubmit="return confirm('Bu çalışanı çıkarmak istediğinize emin misiniz?');">
+                        <input type="hidden" name="tcNo" value="@c.TcNo" />
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="fas fa-user-minus me-1"></i> Çıkar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebBank.Models;
 using WebBank.Models.ViewModels;
-using WebBank.Filters; 
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
@@ -39,10 +38,11 @@ namespace WebBank.Controllers
 
             try
             {
+                calisan.Rol = Rol.GiseMemuru;
                 _context.Calisanlar.Add(calisan);
                 _context.SaveChanges();
                 _logger.LogInformation("Yeni çalışan eklendi: {@Calisan}", calisan);
-                return RedirectToAction("Merhaba");
+                return RedirectToAction("SubeMuduruHesabı","SubeMuduru");
             }
             catch (Exception ex)
             {
@@ -62,7 +62,9 @@ namespace WebBank.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult GiseGiris(GirisViewModel model)
+
         {
+            
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -78,6 +80,8 @@ namespace WebBank.Controllers
                 return View(model);
             }
 
+            HttpContext.Session.SetInt32("GiseMemuruId", calisan.Id);
+            HttpContext.Session.SetInt32("GiseMemuruSubeId", calisan.SubeId);
             HttpContext.Session.SetInt32("KullaniciId", calisan.Id);
             HttpContext.Session.SetString("SubeAd", calisan.Sube.Ad);
 

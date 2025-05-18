@@ -1,20 +1,90 @@
 ﻿@model WebBank.Models.ViewModels.GirisViewModel
 
-<form asp-action="GiseGiris" method="post">
-    <div>
-        <label>TC Kimlik No</label>
-        <input asp-for="TcNo" class="form-control" />
-        <span asp-validation-for="TcNo" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Parola</label>
-        <input asp-for="Parola" type="password" class="form-control" />
-        <span asp-validation-for="Parola" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Giriş Yap</button>
-</form>
+<style>
+    .giris-form {
+        max-width: 400px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        background-color: #f9f9f9;
+        font-family: Arial, sans-serif;
+    }
 
-@if (ViewBag.Hata != null)
-{
-    <p style="color:red;">@ViewBag.Hata</p>
-}
+        .giris-form h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .giris-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .giris-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+            .giris-form input:focus {
+                border-color: #007bff;
+                outline: none;
+            }
+
+        .giris-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+            .giris-form button:hover {
+                background-color: #0056b3;
+            }
+
+        .giris-form .text-danger {
+            font-size: 0.875rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .giris-form .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+</style>
+
+<div class="giris-form">
+    <h1>Gişe Memuru Giriş</h1>
+    <form asp-action="GiseGiris" method="post">
+        <div>
+            <label>TC Kimlik No</label>
+            <input asp-for="TcNo" class="form-control" />
+            <span asp-validation-for="TcNo" class="text-danger"></span>
+        </div>
+        <div>
+            <label>Parola</label>
+            <input asp-for="Parola" type="password" class="form-control" />
+            <span asp-validation-for="Parola" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Giriş Yap</button>
+    </form>
+
+    @if (ViewBag.Hata != null)
+    {
+        <p class="error-message">@ViewBag.Hata</p>
+    }
+</div>

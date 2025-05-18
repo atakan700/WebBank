@@ -1,10 +1,14 @@
-﻿using WebBank.Models;
-namespace WebBank.Models.ViewModels;
+﻿using System.ComponentModel.DataAnnotations;
+using WebBank.Models;
 
-public class KisiHesapViewModel
+namespace WebBank.Models.ViewModels
 {
-    public Kisiler Kisiler { get; set; }
-    public Hesap Hesap { get; set; }    
-    public int SubeId { get; set; }         
+    public class KisiHesapViewModel
+    {
+        public Kisiler Kisiler { get; set; }
+        public Hesap Hesap { get; set; }
+        public int SubeId { get; set; }
 
+        
+    }
 }

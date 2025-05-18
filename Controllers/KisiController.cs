@@ -41,7 +41,7 @@ public class KisiController : Controller
             _context.HesapBilgileri.Add(model.Hesap);
             _context.SaveChanges();
 
-            return RedirectToAction("Listele");
+            return RedirectToAction("SubeHesapları","Calisanlar");
         }
 
         return View(model);

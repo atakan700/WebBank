@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "_Layout";
+    var adSoyad = Context.Session.GetString("AdSoyad");
+    var rol = Context.Session.GetString("Rol");
+    var subeAd = Context.Session.GetString("SubeAd");
+}
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<!-- Bilgi Paneli -->
+<div class="alert alert-info mt-3">
+    <strong>Hoş geldiniz,</strong> @adSoyad <br />
+    <strong>Göreviniz:</strong> @rol <br />
+    <strong>Şube:</strong> @subeAd
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-tools me-2"></i>
+                    Şube Müdürü İşlemleri
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a asp-controller="Calisanlar" asp-action="Ekle" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-user-plus me-2"></i>Çalışan Ekle</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                    <a asp-controller="SubeMuduru" asp-action="CalisanCikar" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-user-minus me-2"></i>Çalışan Çıkar</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                    <a asp-controller="SubeMuduru" asp-action="IslemGecmisi" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-history me-2"></i>İşlem Geçmişi</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                    <a asp-controller="SubeMuduru" asp-action="ParolaDegistir" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-key me-2"></i>Parolamı Değiştir</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Çıkış Butonu -->
+<form asp-controller="Calisanlar" asp-action="GiseCikis" method="post" class="mt-4">
+    <button type="submit" class="btn btn-danger">Çıkış Yap</button>
+</form>

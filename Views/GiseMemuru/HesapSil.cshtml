@@ -1,0 +1,52 @@
+﻿@model WebBank.Models.ViewModels.HesapSilViewModel
+
+@{
+    ViewData["Title"] = "Hesap Sil";
+}
+
+<h2>Hesap Sil</h2>
+
+@if (TempData["Mesaj"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mesaj"]
+    </div>
+}
+
+<form asp-action="HesapSil" method="post">
+    <div class="form-group">
+        <label for="SecilenHesapId">Silinecek Hesabı Seçin:</label>
+        <select asp-for="SecilenHesapId" class="form-control" asp-items="@(new SelectList(Model.Hesaplar, "Id", "IBAN"))">
+            <option value="">-- Hesap Seçin --</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-danger mt-3">Hesabı Sil</button>
+</form>
+
+@if (Model.Hesaplar.Count > 0)
+{
+    <h4 class="mt-4">Tüm Hesaplar</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>IBAN</th>
+                <th>Hesap Türü</th>
+                <th>Bakiye</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hesap in Model.Hesaplar)
+            {
+                <tr>
+                    <td>@hesap.Musteri?.Ad</td>
+                    <td>@hesap.Musteri?.Soyad</td>
+                    <td>@hesap.IBAN</td>
+                    <td>@hesap.HesapTuru</td>
+                    <td>@hesap.Bakiye.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

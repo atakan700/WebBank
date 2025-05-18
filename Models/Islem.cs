@@ -15,10 +15,11 @@ namespace WebBank.Models
         public int Id { get; set; }
         public DateTime Tarih { get; set; }
         public IslemTuru Tur { get; set; }
-        public double Miktar { get; set; }
-        public double Ucret { get; set; }
+        public decimal Miktar { get; set; }
+        public decimal Ucret { get; set; }
         public bool InternetUzerindenMi { get; set; }
 
+        public string Aciklama {  get; set; }
         public int HesapId { get; set; }
         public Hesap Hesap { get; set; }
 

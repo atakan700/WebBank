@@ -1,0 +1,82 @@
+﻿@model WebBank.Models.ViewModels.GiseEftViewModel
+
+@{
+    ViewData["Title"] = "Gişe Memuru EFT İşlemi";
+}
+
+<h2>Gişe Memuru EFT İşlemi</h2>
+
+@if (TempData["BasariliMesaj"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["BasariliMesaj"]
+    </div>
+}
+
+<form asp-action="Eft" method="post" novalidate>
+    <div class="form-group">
+        <label>Müşteri</label>
+        <select asp-for="MusteriId" asp-items="@(new SelectList(Model.Musteriler, "Id", "Ad"))" class="form-control">
+            <option value="">-- Müşteri Seçin --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Gönderen Hesap</label>
+        <select asp-for="GonderenHesapId" asp-items="Model.MusteriHesaplariSelectList" class="form-control">
+            <option value="">-- Gönderen Hesap Seçin --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Alıcı IBAN</label>
+        <input asp-for="AliciIban" class="form-control" />
+        <span asp-validation-for="AliciIban" class="text-danger"></span>
+    </div>
+    <div class="form-group" id="bankaAdiGroup">
+        <label>Alıcı Banka Adı</label>
+        <input asp-for="AliciBankaAdi" class="form-control" />
+        <span asp-validation-for="AliciBankaAdi" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Tutar</label>
+        <input asp-for="Tutar" type="number" step="0.01" class="form-control" />
+        <span asp-validation-for="Tutar" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Transfer Et</button>
+</form>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const musteriSelect = document.querySelector('[name="MusteriId"]');
+            const hesapSelect = document.querySelector('[name="GonderenHesapId"]');
+
+            musteriSelect.addEventListener("change", function () {
+                const musteriId = this.value;
+
+                if (!musteriId) {
+                    hesapSelect.innerHTML = '<option value="">-- Gönderen Hesap Seçin --</option>';
+                    return;
+                }
+
+                fetch(`/GiseMemuru/MusteriHesaplariGetir?musteriId=${musteriId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        hesapSelect.innerHTML = '<option value="">-- Gönderen Hesap Seçin --</option>';
+                        data.forEach(hesap => {
+                            const option = document.createElement("option");
+                            option.value = hesap.id;
+                            option.textContent = hesap.ad;
+                            hesapSelect.appendChild(option);
+                        });
+                    });
+            });
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

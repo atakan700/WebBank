@@ -28,6 +28,7 @@ namespace WebBank.Models
         [Required(ErrorMessage = " alanı gereklidir.")]
         public string Parola { get; set; }
 
+        public Rol Rol { get; set; } = Rol.SubeMuduru;
         // Foreign key
         public int SubeId { get; set; }
 

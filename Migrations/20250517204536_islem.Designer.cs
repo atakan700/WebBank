@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBank.Models;
 
@@ -11,9 +12,11 @@ using WebBank.Models;
 namespace WebBank.Migrations
 {
     [DbContext(typeof(BankDbContext))]
-    partial class BankDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250517204536_islem")]
+    partial class islem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +40,6 @@ namespace WebBank.Migrations
                     b.Property<string>("Parola")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rol")
-                        .HasColumnType("int");
 
                     b.Property<string>("Soyad")
                         .IsRequired()
@@ -68,8 +68,8 @@ namespace WebBank.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Bakiye")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Bakiye")
+                        .HasColumnType("float");
 
                     b.Property<int>("HesapTuru")
                         .HasColumnType("int");
@@ -113,8 +113,8 @@ namespace WebBank.Migrations
                     b.Property<bool>("InternetUzerindenMi")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Miktar")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Miktar")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("Tarih")
                         .HasColumnType("datetime2");
@@ -122,8 +122,8 @@ namespace WebBank.Migrations
                     b.Property<int>("Tur")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Ucret")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Ucret")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
